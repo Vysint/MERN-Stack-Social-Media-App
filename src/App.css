@@ -11,7 +11,7 @@
   --photo: #4cb256;
   --video: #4a4eb7;
   --location: #ef5757;
-  --shedule: #e1ae4a;
+  --schedule: #e1ae4a;
 }
 .App{
   overflow: hidden;
@@ -27,7 +27,7 @@
   background: #a6ddf0;
   filter: blur(72px);
 }
-.btn{
+button{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
   background: var(--buttonBg);
   transition: all 100ms ease-out;
 }
-.btn:hover{
+button:hover{
   cursor: pointer;
   color: var(--orange);
   background: transparent;
