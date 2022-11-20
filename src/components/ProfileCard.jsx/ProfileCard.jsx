@@ -42,7 +42,6 @@ const ProfileCard = () => {
         </div>
         <hr />
       </div>
-      {/* <span>My Profile</span> */}
       {ProfilePage ? "" : <span>My Profile</span>}
     </div>
   );
