@@ -18,6 +18,26 @@ const Auth = () => {
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignUp) {
+      if (data.password !== data.confirmpass) {
+        setConfirmPass(false);
+      }
+    }
+  };
+
+  const resetForm = () => {
+    setConfirmPass(true);
+    setData({
+      username: "",
+      firstname: "",
+      lastname: "",
+      password: "",
+      confirmpass: "",
+    });
+  };
   return (
     // Left side (logo)
     <div className="Auth">
@@ -30,7 +50,7 @@ const Auth = () => {
       </div>
       {/* Right side */}
       <div className="a-right">
-        <form className="infoForm authForm">
+        <form className="infoForm authForm" onSubmit={handleSubmit}>
           <h3>{isSignUp ? "Sign up" : "Log In"}</h3>
 
           {isSignUp && (
@@ -41,6 +61,7 @@ const Auth = () => {
                 className="infoInput"
                 name="firstname"
                 onChange={handleChange}
+                value={data.firstname}
               />
               <input
                 type="text"
@@ -48,6 +69,7 @@ const Auth = () => {
                 className="infoInput"
                 name="lastname"
                 onChange={handleChange}
+                value={data.lastname}
               />
             </div>
           )}
@@ -59,6 +81,7 @@ const Auth = () => {
               name="username"
               placeholder="Username"
               onChange={handleChange}
+              value={data.username}
             />
           </div>
 
@@ -69,6 +92,7 @@ const Auth = () => {
               name="password"
               placeholder="Password"
               onChange={handleChange}
+              value={data.password}
             />
             {isSignUp && (
               <input
@@ -77,14 +101,29 @@ const Auth = () => {
                 name="confirmpass"
                 placeholder="Confirm Password"
                 onChange={handleChange}
+                value={data.confirmpass}
               />
             )}
           </div>
+          <span
+            style={{
+              display: confirmPass ? "none" : "block",
+              color: "red",
+              fontSize: "12px",
+              alignSelf: "flex-end",
+              marginRight: "5px",
+            }}
+          >
+            * Confirm Password is not same
+          </span>
 
           <div>
             <span
               style={{ fontSize: "12px", cursor: "pointer" }}
-              onClick={() => setIsSignUp((prev) => !prev)}
+              onClick={() => {
+                resetForm();
+                setIsSignUp((prev) => !prev);
+              }}
             >
               {isSignUp
                 ? "Already have an account. Login!"
