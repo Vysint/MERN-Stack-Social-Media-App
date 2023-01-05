@@ -10,7 +10,7 @@ const Auth = () => {
 
   const dispatch = useDispatch();
   const [data, setData] = useState({
-    username: "",
+    email: "",
     firstname: "",
     lastname: "",
     password: "",
@@ -36,7 +36,7 @@ const Auth = () => {
   const resetForm = () => {
     setConfirmPass(true);
     setData({
-      username: "",
+      email: "",
       firstname: "",
       lastname: "",
       password: "",
@@ -81,12 +81,12 @@ const Auth = () => {
 
           <div>
             <input
-              type="text"
+              type="email"
               className="infoInput"
-              name="username"
-              placeholder="Username"
+              name="email"
+              placeholder="Email"
               onChange={handleChange}
-              value={data.username}
+              value={data.email}
             />
           </div>
 
