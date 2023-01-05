@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 // Registering a new User
 exports.signup = async (req, res, next) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstname, lastname } = req.body;
 
   let hashedPassword;
   try {
@@ -16,8 +16,8 @@ exports.signup = async (req, res, next) => {
   const newUser = new User({
     email,
     password: hashedPassword,
-    firstName,
-    lastName,
+    firstname,
+    lastname,
   });
 
   try {
