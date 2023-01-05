@@ -1,20 +1,30 @@
 {
-  "name": "server",
+  "name": "backend-social-media-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
+  "description": "social-media-app backend",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vysint/Backend-social-media-app.git"
   },
   "author": "vincent",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.1",
-    "express": "^4.18.2",
-    "mongoose": "^6.7.3"
+  "bugs": {
+    "url": "https://github.com/Vysint/Backend-social-media-app/issues"
   },
+  "homepage": "https://github.com/Vysint/Backend-social-media-app#readme",
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.2"
   }
 }
