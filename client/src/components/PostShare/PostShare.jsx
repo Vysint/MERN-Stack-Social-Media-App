@@ -10,11 +10,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { uploadImage } from "../../actions/UploadAction";
 
 const PostShare = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { identifiedUser } = useSelector((state) => state.authReducer.authData);
   const [image, setImage] = useState(null);
-  const imageRef = useRef();
+
   const desc = useRef();
-  const { user } = useSelector((state) => state.authReducer.authData);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -22,12 +22,13 @@ const PostShare = () => {
       setImage(img);
     }
   };
+  const imageRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newPost = {
-      userId: user._id,
+      userId: identifiedUser._id,
       desc: desc.current.value,
     };
 
@@ -38,12 +39,12 @@ const PostShare = () => {
       data.append("name", filename);
       data.append("file", image);
       newPost.image = filename;
+      console.log(newPost);
 
-      try{
-        dispatch(uploadImage(data))
-
-      }catch(error){
-        console.log(error)
+      try {
+        dispatch(uploadImage(data));
+      } catch (error) {
+        console.log(error);
       }
     }
   };
@@ -77,12 +78,7 @@ const PostShare = () => {
             Share
           </button>
           <div style={{ display: "none" }}>
-            <input
-              type="file"
-              name="myImage"
-              ref={imageRef}
-              onChange={onImageChange}
-            />
+            <input type="file" ref={imageRef} onChange={onImageChange} />
           </div>
         </div>
         {image && (
