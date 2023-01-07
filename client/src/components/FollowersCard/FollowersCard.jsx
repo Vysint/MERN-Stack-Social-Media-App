@@ -7,7 +7,7 @@ const FollowersCard = () => {
     <div className="FollowersCard">
         <h3>Who is following you</h3>
 
-        {Followers. map((follower, id)=>{
+        {Followers.map((follower, id)=>{
             return(
                 <div className="follower">
                     <div>
