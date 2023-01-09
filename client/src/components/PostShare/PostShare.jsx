@@ -25,6 +25,11 @@ const PostShare = () => {
   };
   const imageRef = useRef();
 
+  const resetShare = () => {
+    setImage(null);
+    desc.current.value = "";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,6 +54,7 @@ const PostShare = () => {
       }
     }
     dispatch(uploadPost(newPost));
+    resetShare();
   };
   return (
     <div className="PostShare">
