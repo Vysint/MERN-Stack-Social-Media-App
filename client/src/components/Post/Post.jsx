@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./Post.css";
 import Comment from "../../img/comment.png";
@@ -7,7 +7,9 @@ import Heart from "../../img/like.png";
 import NotLike from "../../img/notlike.png";
 
 const Post = ({ data }) => {
-  // const { user } = useSelector((state) => state.authReducer.authdata);
+  const { user } = useSelector((state) => state.authReducer.authData);
+
+  const [liked, setLiked] = useState(data.likes.includes(user._id));
   return (
     <div className="Post">
       <img
