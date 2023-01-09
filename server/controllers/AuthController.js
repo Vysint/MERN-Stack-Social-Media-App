@@ -35,26 +35,23 @@ exports.signup = async (req, res, next) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  let identifiedUser;
+  let user;
 
   try {
-    identifiedUser = await User.findOne({ email: email });
+    user = await User.findOne({ email: email });
 
-    if (identifiedUser) {
-      const validPassword = await bcrypt.compare(
-        password,
-        identifiedUser.password
-      );
+    if (user) {
+      const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
         res.status(400).json("You entered a wrong password.");
       } else {
         const token = jwt.sign(
-          { email: identifiedUser.email, id: identifiedUser._id },
+          { email: user.email, id: user._id },
           process.env.JWT_KEY,
           { expiresIn: "1h" }
         );
 
-        res.status(200).json({ identifiedUser, token });
+        res.status(200).json({ user, token });
       }
     } else {
       res.status(404).json("User does not exist");
