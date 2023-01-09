@@ -8,6 +8,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/AuthRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const postRoutes = require("./routes/PostRoutes");
+const uploadRoutes = require("./routes/UploadRoute");
 
 const app = express();
 
@@ -18,7 +19,8 @@ app.use(cors());
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
-app.use("/post", postRoutes);
+app.use("/posts", postRoutes);
+app.use("/upload", uploadRoutes);
 
 dotenv.config();
 mongoose.set("strictQuery", true);
