@@ -12,7 +12,7 @@ import { uploadImage, uploadPost } from "../../actions/UploadAction";
 const PostShare = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.postReducer.uploading);
-  const { identifiedUser } = useSelector((state) => state.authReducer.authData);
+  const { user } = useSelector((state) => state.authReducer.authData);
   const [image, setImage] = useState(null);
 
   const desc = useRef();
@@ -34,7 +34,7 @@ const PostShare = () => {
     e.preventDefault();
 
     const newPost = {
-      userId: identifiedUser._id,
+      userId: user._id,
       desc: desc.current.value,
     };
 
