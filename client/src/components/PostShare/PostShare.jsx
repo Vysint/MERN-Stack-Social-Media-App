@@ -11,6 +11,7 @@ import { uploadImage, uploadPost } from "../../actions/UploadAction";
 
 const PostShare = () => {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.postReducer.uploading);
   const { identifiedUser } = useSelector((state) => state.authReducer.authData);
   const [image, setImage] = useState(null);
 
@@ -47,7 +48,7 @@ const PostShare = () => {
         console.log(error);
       }
     }
-    dispatch(uploadPost(newPost))
+    dispatch(uploadPost(newPost));
   };
   return (
     <div className="PostShare">
@@ -75,8 +76,12 @@ const PostShare = () => {
             <UilSchedule />
             Shedule
           </div>
-          <button className="button ps-button" onClick={handleSubmit}>
-            Share
+          <button
+            className="button ps-button"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Uploading..." : "Share"}
           </button>
           <div style={{ display: "none" }}>
             <input type="file" ref={imageRef} onChange={onImageChange} />
