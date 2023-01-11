@@ -4,7 +4,7 @@ import ProfileModal from "../ProfileModal/ProfileModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as UserApi from "../../api/UserRequest";
-import {logOut} from '../../actions/AuthAction'
+import { logOut } from "../../actions/AuthAction";
 import "./InfoCard.css";
 
 const InfoCard = () => {
@@ -31,8 +31,8 @@ const InfoCard = () => {
   }, [profileUserId, user]);
 
   const handleLogout = () => {
-    dispatch(logOut())
-  }
+    dispatch(logOut());
+  };
   return (
     <div className="InfoCard">
       <div className="infoHead">
@@ -47,6 +47,7 @@ const InfoCard = () => {
             <ProfileModal
               modalOpened={modalOpened}
               setModalOpened={setModalOpened}
+              data={user}
             />
           </div>
         ) : (
