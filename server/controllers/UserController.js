@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
@@ -21,15 +22,20 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   const id = req.params.id;
 
-  const { userId, userAdminStatus, password } = req.body;
+  const { _id, userAdminStatus, password } = req.body;
 
-  if (id === userId || userAdminStatus) {
+  if (id === _id) {
     try {
       if (password) {
         req.body.password = await bcrypt.hash(password, 12);
       }
       const user = await User.findByIdAndUpdate(id, req.body, { new: true });
-      res.status(200).json(user);
+      const token = jwt.sign(
+        { email: user.email, id: user._id },
+        process.env.JWT_KEY,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({user, token});
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
