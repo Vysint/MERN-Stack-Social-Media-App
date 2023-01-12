@@ -77,22 +77,22 @@ exports.deleteUser = async (req, res) => {
 exports.followUser = async (req, res) => {
   const id = req.params.id;
 
-  const { userId } = req.body;
+  const { _id } = req.body;
 
-  if (userId === id) {
+  if (_id === id) {
     res.status(403).json("Action forbidden");
   } else {
     try {
       const followedUser = await User.findById(id);
-      const followingUser = await User.findById(userId);
+      const followingUser = await User.findById(_id);
 
-      if (!followedUser.followers.includes(userId)) {
-        await followedUser.updateOne({ $push: { followers: userId } });
+      if (!followedUser.followers.includes(_id)) {
+        await followedUser.updateOne({ $push: { followers: _id } });
         await followingUser.updateOne({ $push: { following: id } });
 
         res.status(200).json("User Followed");
       } else {
-        res.status(500).json("Already following the user.");
+        res.status(403).json("Already following this user.");
       }
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -103,21 +103,21 @@ exports.followUser = async (req, res) => {
 exports.unFollowUser = async (req, res) => {
   const id = req.params.id;
 
-  const { userId } = req.body;
+  const { _id } = req.body;
 
-  if (userId === id) {
+  if (_id === id) {
     res.status(403).json("Action Forbidden");
   } else {
     try {
       const followeduser = await User.findById(id);
-      const followingUser = await User.findById(userId);
+      const followingUser = await User.findById(_id);
 
-      if (followeduser.followers.includes(userId)) {
-        await followeduser.updateOne({ $pull: { followers: userId } });
+      if (followeduser.followers.includes(_id)) {
+        await followeduser.updateOne({ $pull: { followers: _id } });
         await followingUser.updateOne({ $pull: { following: id } });
         res.status(200).json("User unfollowed!");
       } else {
-        res.status(403).json("User is not followed by you1");
+        res.status(403).json("User is not followed by you");
       }
     } catch (error) {
       res.status(500).json({ message: error.message });
