@@ -4,6 +4,8 @@ const router = express.Router();
 
 const userControllers = require("../controllers/UserController");
 
+router.get('/', userControllers.getAllusers)
+
 router.get("/:id", userControllers.getUser);
 
 router.put("/:id", userControllers.updateUser);
